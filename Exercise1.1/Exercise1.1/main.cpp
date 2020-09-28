@@ -34,15 +34,38 @@ void random_tab(vector<int> &V)
     return;
 }
 
+void sort_tab_1(vector<int> &V)
+{
+    int a = (int)V.size();
+    for(int i = 0; i < a - 1; i++)
+    {
+        for(int j = 0; j < a - 1 - i; j++)
+        {
+            int temp = 0;
+            if(V[j]>V[j+1]){
+                temp = V[j];
+                V[j] = V[j+1];
+                V[j+1] = temp;
+            }
+        }
+    }
+    return;
+}
+
+
 
 void test_1()
 {
     std::vector<int> tab(10);
     random_tab(tab);
+    cout << "before sorting: ";
     print_tab(tab);
+    sort_tab_1(tab);
+    cout << "after sorting: ";
+    print_tab(tab);
+    
     return;
 }
-
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //Main
