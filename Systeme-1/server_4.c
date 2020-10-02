@@ -39,7 +39,14 @@ int main()
     // create pip
     int fd[2];
     pipe(fd);
+    int len;
     char buf[1024];
+
+    if(pipe(fd)<0)
+    {
+        perror("pipe");
+        exit(0);
+    }
 
     int pid=fork();  // creer deux process
 
@@ -61,21 +68,28 @@ int main()
             write(fd[1], msg, strlen(msg));
             sleep(2);
         }
-        wait(NULL); 
         close(fd[1]);
+        wait(NULL); 
     }
     else
     {
         close(fd[1]);
         while(running)
         {
-            printf("Je suis le fils. mon id est %d\n", getpid());
             printf("nombre aleatoire = %d\n", rand() % 100);
+            printf("Je suis le fils. mon id est %d\n", getpid());
+            read(fd[0], buf, sizeof(buf));
             int len = read(fd[0], buf, sizeof(buf));
-            write(STDOUT_FILENO, buf, len);
+            // write(STDOUT_FILENO, buf, len)
+            if (len == 0) 
+            {
+                exit(0); 
+            }
+            printf("%s\n", buf);
             sleep(2);
         }
         close(fd[0]);
+        exit(0);
 
     }
     printf("Apres la boucle...\n");
@@ -96,5 +110,5 @@ int main()
             sleep(2);
         }
 
-
+            printf("Je suis le fils. pere id est %d\n", getppid());
 */

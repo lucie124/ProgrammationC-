@@ -52,8 +52,7 @@ int main()
             printf("nombre aleatoire = %d\n", rand() % 100);
             sleep(2);
         }
-        printf("Fils apres la boucle...\n");
-        atexit(exit_message);
+        exit(0);
     }
     else 
     {
@@ -65,9 +64,8 @@ int main()
             printf("nombre aleatoire = %d\n", rand() % 100);
             sleep(2);
         }
-        printf("Pere apres la boucle...\n");
         wait(NULL); 
-        atexit(exit_message);
+        exit(0);
     }
 
     // sigaction(SIGINT, &act, NULL);  // SIGINT; ^C affiche le message
@@ -82,8 +80,8 @@ int main()
     //     printf("nombre aleatoire = %d\n", rand() % 100);
     //     sleep(1);
     // }
-    // printf("Apres la boucle...\n");
-    // atexit(exit_message);
+    printf("Apres la boucle...\n");
+    atexit(exit_message);
     return EXIT_SUCCESS;
 }
 
