@@ -23,7 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		399C2B09252248E000112034 /* Exercise1.1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Exercise1.1; sourceTree = BUILT_PRODUCTS_DIR; };
+		399C2B09252248E000112034 /* Exercise1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = Exercise1; path = ../../../../../../../../Documents/Studies/CentraleSupelec/3A/3IF1020_AtelierProgrammation/3IF1020/Partie1/Exercise1; sourceTree = BUILT_PRODUCTS_DIR; };
 		399C2B0C252248E000112034 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -41,7 +41,7 @@
 		399C2B00252248E000112034 = {
 			isa = PBXGroup;
 			children = (
-				399C2B0B252248E000112034 /* Exercise1.1 */,
+				399C2B0B252248E000112034 /* Exercise1 */,
 				399C2B0A252248E000112034 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,17 +49,17 @@
 		399C2B0A252248E000112034 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				399C2B09252248E000112034 /* Exercise1.1 */,
+				399C2B09252248E000112034 /* Exercise1 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		399C2B0B252248E000112034 /* Exercise1.1 */ = {
+		399C2B0B252248E000112034 /* Exercise1 */ = {
 			isa = PBXGroup;
 			children = (
 				399C2B0C252248E000112034 /* main.cpp */,
 			);
-			path = Exercise1.1;
+			path = Exercise1;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -79,7 +79,7 @@
 			);
 			name = Exercise1.1;
 			productName = Exercise1.1;
-			productReference = 399C2B09252248E000112034 /* Exercise1.1 */;
+			productReference = 399C2B09252248E000112034 /* Exercise1 */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -95,7 +95,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 399C2B04252248E000112034 /* Build configuration list for PBXProject "Exercise1.1" */;
+			buildConfigurationList = 399C2B04252248E000112034 /* Build configuration list for PBXProject "Exercise1" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -255,7 +255,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		399C2B04252248E000112034 /* Build configuration list for PBXProject "Exercise1.1" */ = {
+		399C2B04252248E000112034 /* Build configuration list for PBXProject "Exercise1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				399C2B0E252248E000112034 /* Debug */,

@@ -52,8 +52,6 @@ void sort_tab_1(vector<int> &V)
     return;
 }
 
-
-
 void test_1()
 {
     std::vector<int> tab(10);
@@ -65,6 +63,31 @@ void test_1()
     print_tab(tab);
     
     return;
+}
+
+//1.2. Tri selon un autre critère
+
+bool less(int a, int b)
+{
+    bool x = 0;
+    if(a<b){
+        x = 1;
+    }
+    return x;
+}
+
+bool greater(int a, int b)
+{
+    bool x = 0;
+    if(a>b){
+        x = 1;
+    }
+    return x;
+}
+
+void sort_tab_2()
+{
+    
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
