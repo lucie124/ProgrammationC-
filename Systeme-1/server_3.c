@@ -11,7 +11,7 @@ bool running = 1;
 void stop_handler( int sig )
 {
     printf("\n Signal %d reçu.\n", sig);
-    running = 0;
+    int running = 0;
     return;
 }
 
@@ -58,7 +58,6 @@ int main()
     else 
     {
 		// printf("Je suis le pere. mon id est %d\n", getpid());
-        wait(NULL); 
         while(running)
         {
             printf("Je suis le pere. mon id est %d\n", getpid());
@@ -67,6 +66,7 @@ int main()
             sleep(2);
         }
         printf("Pere apres la boucle...\n");
+        wait(NULL); 
         atexit(exit_message);
     }
 
