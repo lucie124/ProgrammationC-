@@ -27,7 +27,7 @@ int main()
     act.sa_handler = stop_handler;
     act.sa_flags = 0;
 
-    sigaction(SIGTERM, &act, NULL); // SIGINT -> SIGTERM;  kill <pid> affiche le message
+    sigaction(SIGKILL, &act, NULL); // SIGKILL;  kill -9 <pid> affiche le message
     
 
     while(running)
@@ -40,3 +40,8 @@ int main()
     printf("Apres la boucle...\n");
     return EXIT_SUCCESS;
 }
+
+/*
+- SIGKILL avec kill -9 <ppid> : le terminal est directement ferme
+- SIGKILL avec kill <ppid> : le programme continue l'execution
+*/
