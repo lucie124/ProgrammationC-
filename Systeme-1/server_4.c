@@ -63,7 +63,6 @@ int main()
         {
             printf("Je suis le pere. mon id est %d\n", getpid());
             // printf("nombre aleatoire = %d\n", rand() % 100);
-            int a = rand() % 100;
             char *msg ="let's chat with pipe !\n";
             write(fd[1], msg, strlen(msg));
             sleep(2);
@@ -78,7 +77,6 @@ int main()
         {
             printf("nombre aleatoire = %d\n", rand() % 100);
             printf("Je suis le fils. mon id est %d\n", getpid());
-            read(fd[0], buf, sizeof(buf));
             int len = read(fd[0], buf, sizeof(buf));
             // write(STDOUT_FILENO, buf, len)
             if (len == 0) 
