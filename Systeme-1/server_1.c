@@ -7,8 +7,8 @@ int main()
     printf("Avant la boucle\n");
     while(1)
     {
-        printf("pid=%d\n", getpid());
-        printf("ppid=%d\n", getppid());
+        printf("pid = %d\n", getpid());
+        printf("ppid = %d\n", getppid());
         printf("nombre aleatoire = %d\n", rand() % 100);
         sleep(1);
     }
