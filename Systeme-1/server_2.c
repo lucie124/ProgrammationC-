@@ -27,7 +27,8 @@ int main()
     act.sa_handler = stop_handler;
     act.sa_flags = 0;
 
-    sigaction(SIGINT, &act, NULL); 
+    sigaction(SIGTERM, &act, NULL); // SIGINT -> SIGTERM;  kill <pid> affiche le message
+    
 
     while(running)
     {
