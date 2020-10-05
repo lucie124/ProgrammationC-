@@ -58,17 +58,21 @@ int main()
 
     else if (pid > 0) 
     {
+        int status = 0;
         close(fd[0]);
         while(running)
         {
             printf("Je suis le pere. mon id est %d\n", getpid());
-            // printf("nombre aleatoire = %d\n", rand() % 100);
+            printf("nombre aleatoire = %d\n", rand() % 100);
             char *msg ="let's chat with pipe !\n";
             write(fd[1], msg, strlen(msg));
             sleep(2);
         }
         close(fd[1]);
+        wait(&status);
         wait(NULL); 
+        printf("Apres la boucle...\n");
+        atexit(exit_message);
     }
     else
     {
@@ -97,6 +101,16 @@ int main()
 
 
 
+//*********************************************************
+/*
+Pour faire en sorte que le père affiche aussi ses messages quand on arrête le fils en premier,
+j'essaie de construire le signal reçu par le père quand le fils exit anormalement (par ex. kill)
+avec la fonction WIFEXITED(status) qui retourne 0 si le fils exit anormalement.
+Mais ça n'a pas fonctionné.
+À étudier après.
+
+
+*/
 //*********************************************************
 /*Brouillon
 
