@@ -85,7 +85,7 @@ int main()
             // write(STDOUT_FILENO, buf, len)
             if (len == 0) 
             {
-                exit(0); 
+                exit(0);
             }
             printf("%s\n", buf);
             sleep(2);
