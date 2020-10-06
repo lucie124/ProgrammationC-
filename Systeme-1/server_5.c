@@ -6,7 +6,7 @@
 #include <sys/types.h> // wait()
 #include <sys/wait.h> // wait()
 #include <string.h> //strlen()
-#include <fcntl.h>
+#include <fcntl.h> //for open 
 #include <limits.h>
 #include <sys/stat.h>   //for mkfifo
 #include <time.h>
