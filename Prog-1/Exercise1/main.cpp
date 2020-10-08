@@ -12,6 +12,8 @@ using namespace std ;
 #include <cstdlib> //for rand()
 #include <functional> //for function
 #include <forward_list> //for forward_list
+#include <limits> // for numeric_limits
+#include <algorithm> //for min and max
 //typedef bool (*func) (int,int);
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -207,12 +209,42 @@ void test_3()
 }
 
 
+//2.4. Réduction
+
+int reduce(std::forward_list<int> L, int a, std::function<int(int,int)> pfunc)
+{
+    int curr = a;
+    for(int l : L)
+    {
+        curr = pfunc(curr,l);
+    }
+    return curr;
+}
+
+void test_4()
+{
+    //befor reducing
+    std::forward_list<int> L = random_list(10);
+    cout << "before reducing: ";
+    print_list(L);
+    
+    //reduce - min
+    int min;
+    min = reduce(L,std::numeric_limits<int>::max(),[](int a, int b){return std::min(a,b);});
+    cout << "reduce on min: " << min << endl;
+    
+    //reduce - max
+    int max;
+    max = reduce(L,std::numeric_limits<int>::min(),[](int a, int b){return std::max(a,b);});
+    cout << "reduce on max: " << max << endl;;
+}
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //Main
 
 int main()
 {
-    test_3();
+    test_4();
     
     return 0;
 }
