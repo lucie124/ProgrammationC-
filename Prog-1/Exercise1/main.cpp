@@ -159,9 +159,9 @@ std::forward_list<int> map(std::forward_list<int> L, std::function<int(int)> pfu
 //    auto prec = Lf.before_begin();
 //    auto curr = Lf.begin();
 //    Lf.pop_front();
-    for(int l : L) {
-        Lfi.push_front(l);
-    }
+//    for(int l : L) {
+//        Lfi.push_front(l);
+//    }
     for(int m : L) {
         Lf.push_front(pfunc(m));
     }
@@ -179,6 +179,17 @@ void test_3()
     print_list(Lf);
 }
 
+//2.3. Filtrage
+std::forward_list<int> filter(std::forward_list<int> L, std::function<bool(int)> pfunc)
+{
+    std::forward_list<int> Lp;
+    for(int l : L) {
+        if(pfunc(l)){
+            Lp.push_front(l);
+        }
+    }
+    return Lp;
+}
 
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
