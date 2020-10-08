@@ -168,18 +168,9 @@ std::forward_list<int> map(std::forward_list<int> L, std::function<int(int)> pfu
     return Lf;
 }
 
-void test_3()
-{
-    std::forward_list<int> L = random_list(10);
-    cout << "before mapping: ";
-    print_list(L);
-    std::forward_list<int> Lf;
-    Lf = map(L, [](int a){return a*3;});
-    cout << "after mapping: ";
-    print_list(Lf);
-}
 
 //2.3. Filtrage
+
 std::forward_list<int> filter(std::forward_list<int> L, std::function<bool(int)> pfunc)
 {
     std::forward_list<int> Lp;
@@ -189,6 +180,21 @@ std::forward_list<int> filter(std::forward_list<int> L, std::function<bool(int)>
         }
     }
     return Lp;
+}
+
+void test_3()
+{
+    std::forward_list<int> L = random_list(10);
+    cout << "before mapping: ";
+    print_list(L);
+    std::forward_list<int> Lf;
+    Lf = map(L, [](int a){return a*3;});
+    cout << "after mapping: ";
+    print_list(Lf);
+    std::forward_list<int> Lfp;
+    Lfp = filter(Lf, [](int a){return a%2==0;});
+    cout << "after filtering: ";
+    print_list(Lfp);
 }
 
 
