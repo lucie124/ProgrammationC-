@@ -11,10 +11,15 @@ using namespace std ;
 #include <vector> // for vector<>
 #include <cstdlib> //for rand()
 #include <functional> //for function
+#include <forward_list> //for forward_list
 //typedef bool (*func) (int,int);
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //Functions
+
+//1. Tris
+
+//1.1. Tri par ordre croissant
 
 void print_tab(vector<int> V) //Afficher le tableau
 {
@@ -119,12 +124,70 @@ void test_2()
     print_tab(tab2);
 }
 
+//2. Listes
+
+//2.1. Création, affichage
+
+std::forward_list<int> random_list(unsigned int a)
+{
+    std::forward_list< int > L;
+    srand((unsigned)time(NULL));
+    for(int i=0; i<a; i++)
+    {
+        L.push_front((int)rand()%(100));
+    }
+    return L;
+}
+
+void print_list(std::forward_list<int> L)
+{
+    cout << "[ ";
+    for(int l : L) {
+        cout << l << " ";
+    }
+    cout << "]" << endl;
+    return;
+}
+
+//2.2. Application
+
+std::forward_list<int> map(std::forward_list<int> L, std::function<int(int)> pfunc)
+{
+    std::forward_list<int> Lfi;
+    std::forward_list<int> Lf;
+//    Lf.push_front(1);
+//    auto prec = Lf.before_begin();
+//    auto curr = Lf.begin();
+//    Lf.pop_front();
+    for(int l : L) {
+        Lfi.push_front(l);
+    }
+    for(int m : L) {
+        Lf.push_front(pfunc(m));
+    }
+    return Lf;
+}
+
+void test_3()
+{
+    std::forward_list<int> L = random_list(10);
+    cout << "before mapping: ";
+    print_list(L);
+    std::forward_list<int> Lf;
+    Lf = map(L, [](int a){return a*3;});
+    cout << "after mapping: ";
+    print_list(Lf);
+    
+    
+    
+}
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //Main
 
 int main()
 {
-    test_2();
+    test_3();
     
     return 0;
 }
