@@ -184,13 +184,22 @@ std::forward_list<int> filter(std::forward_list<int> L, std::function<bool(int)>
 
 void test_3()
 {
+    //befor mapping
     std::forward_list<int> L = random_list(10);
     cout << "before mapping: ";
     print_list(L);
+    
+    srand((unsigned)time(NULL));
+    int coef = (int)rand()%(5)+1;
+    cout << "Multiply coeff: " << coef << endl;
+    
+    //after mapping
     std::forward_list<int> Lf;
-    Lf = map(L, [](int a){return a*3;});
+    Lf = map(L, [coef](int a){return a*coef;});
     cout << "after mapping: ";
     print_list(Lf);
+    
+    //after filtering
     std::forward_list<int> Lfp;
     Lfp = filter(Lf, [](int a){return a%2==0;});
     cout << "after filtering: ";
