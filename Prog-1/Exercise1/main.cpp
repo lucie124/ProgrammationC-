@@ -10,7 +10,8 @@
 using namespace std ;
 #include <vector> // for vector<>
 #include <cstdlib> //for rand()
-typedef bool (*func) (int,int);
+#include <functional> //for function
+//typedef bool (*func) (int,int);
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //Functions
@@ -86,7 +87,7 @@ bool greaterfc(int a, int b)
     return x;
 }
 
-void sort_tab_2(vector<int> &V, func pfunc)
+void sort_tab_2(vector<int> &V, std::function<bool(int,int)> pfunc)
 {
     int a = (int)V.size();
     for(int i = 0; i < a - 1; i++)
