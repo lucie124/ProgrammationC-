@@ -111,8 +111,8 @@ void test_2()
     std::vector<int> tab2 = tab;
     cout << "before sorting: ";
     print_tab(tab);
-    sort_tab_2(tab, lessfc);
-    sort_tab_2(tab2, greaterfc);
+    sort_tab_2(tab, [](int a, int b){return a < b;});
+    sort_tab_2(tab2, [](int a, int b){return a > b;});
     cout << "after sorting less: ";
     print_tab(tab);
     cout << "after sorting greater: ";
