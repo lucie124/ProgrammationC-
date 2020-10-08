@@ -177,10 +177,9 @@ void test_3()
     Lf = map(L, [](int a){return a*3;});
     cout << "after mapping: ";
     print_list(Lf);
-    
-    
-    
 }
+
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //Main
@@ -192,13 +191,18 @@ int main()
     return 0;
 }
 
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//Commentaires
+/*
+ Q: Que constatez-vous en comparant l'ordre des éléments de la liste initiale et celui de la liste résultat ? Pouvez-vous l'expliquer (sous forme de commentaire dans votre fichier source) ? Ne pas essayer d'inverser le résultat, ce point sera repris dans la partie bonus.
+ A: Le résultat est normalement inversé, c'est-à-dire que le dernier élément sort de fonction map est le multiple de celui de le premier élément dans la list initiale. C'est en fait du à la construction de la list chaînée, on parcourt la chaîne avec un pointeur. On connaît que le début de la chaîne mais pas la fin, donc on ne peut faire que push_front mais pas after.
+    Quand je construiais mon code, j'avais pris en compte de ce point et ai inversé la liste une fois plus. Le résultat de mon code est donc dans l'ordre synchronisé.
+ 
 
 
 
 
-
-
-
+*/
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //Brouillons
 
