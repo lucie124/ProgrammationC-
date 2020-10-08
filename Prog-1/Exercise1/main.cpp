@@ -10,6 +10,7 @@
 using namespace std ;
 #include <vector> // for vector<>
 #include <cstdlib> //for rand()
+typedef bool (*func) (int,int);
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //Functions
@@ -67,7 +68,7 @@ void test_1()
 
 //1.2. Tri selon un autre critère
 
-bool less(int a, int b)
+bool lessfc(int a, int b)
 {
     bool x = 0;
     if(a<b){
@@ -76,7 +77,7 @@ bool less(int a, int b)
     return x;
 }
 
-bool greater(int a, int b)
+bool greaterfc(int a, int b)
 {
     bool x = 0;
     if(a>b){
@@ -85,9 +86,36 @@ bool greater(int a, int b)
     return x;
 }
 
-void sort_tab_2()
+void sort_tab_2(vector<int> &V, func pfunc)
 {
-    
+    int a = (int)V.size();
+    for(int i = 0; i < a - 1; i++)
+    {
+        for(int j = 0; j < a - 1 - i; j++)
+        {
+            int temp = 0;
+            if(pfunc(V[j],V[j+1])){
+                temp = V[j];
+                V[j] = V[j+1];
+                V[j+1] = temp;
+            }
+        }
+    }
+}
+
+void test_2()
+{
+    std::vector<int> tab(10);
+    random_tab(tab);
+    std::vector<int> tab2 = tab;
+    cout << "before sorting: ";
+    print_tab(tab);
+    sort_tab_2(tab, lessfc);
+    sort_tab_2(tab2, greaterfc);
+    cout << "after sorting less: ";
+    print_tab(tab);
+    cout << "after sorting greater: ";
+    print_tab(tab2);
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -95,7 +123,7 @@ void sort_tab_2()
 
 int main()
 {
-    test_1();
+    test_2();
     
     return 0;
 }
