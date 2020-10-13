@@ -6,16 +6,31 @@
 class Nombre {
 
 public:
+    // Constructeur par défaut
     Nombre(){
         *premier_ = 0;
     }
+    
 
+    // Constructeur par défaut
     Nombre( unsigned long n ){
         *premier_ = Chiffre(n);
     }
 
+    // Constructeur de copie
+    Nombre(const Nombre & n){
+        premier_ = n.premier_;
+    }
+
+    // Destructeur
     ~Nombre(){}
- 
+
+    // Opérateur d'affectation
+    Nombre & operator=( const Nombre & n ){
+        premier_ = new Chiffre(*n.premier_);
+        return *this;
+    }
+    
     friend std::ostream & operator << ( std::ostream & out, const Nombre & n );
 
 

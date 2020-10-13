@@ -4,7 +4,7 @@
 #include <sstream>
 
 
-TEST( TestNombre, TestNombreVide )
+TEST( TestNombre, TestNombreVide_Defaut )
 {
     Nombre n;
     std::ostringstream os;
@@ -28,6 +28,23 @@ TEST( TestNombre, TestNombre12345678 )
     EXPECT_EQ( os.str(), "12345678" );
 }
 
+TEST( TestNombre, TestConstructionCopy )
+{
+    Nombre n{ 246854 };
+    Nombre n2 = Nombre(n);
+    std::ostringstream os;
+    os << n2;
+    EXPECT_EQ( os.str(), "246854" );
+}
+
+TEST( TestNombre, TestOpAffectCopy )
+{
+    Nombre n{ 13579 };
+    Nombre n2 = n;
+    std::ostringstream os;
+    os << n2;
+    EXPECT_EQ( os.str(), "13579" );
+}
 
 int main( int argc, char * argv[] )
 {
