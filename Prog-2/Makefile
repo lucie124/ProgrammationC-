@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS = -pthread -std=c++17
-LDFLAGS = -I../googletest/googletest/include -L../gtest/lib -lgtest
+LDFLAGS = -Igoogletest/googletest/include -Lgtest/lib -lgtest
 
 tests: Nombre.o tests.o
 	$(CC) $(CFLAGS) -o tests tests.o Nombre.o $(LDFLAGS)
