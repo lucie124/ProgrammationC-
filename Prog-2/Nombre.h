@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include <string>
+#include <cctype>
 
 //Pour les class
 
@@ -25,6 +26,7 @@ public:
     // Destructeur
     ~Nombre(){}
 
+
     // Opérateur d'affectation
     Nombre & operator=( const Nombre & n ){
         premier_ = new Chiffre(*n.premier_);
@@ -32,7 +34,7 @@ public:
     }
     
     friend std::ostream & operator << ( std::ostream & out, const Nombre & n );
-
+    friend std::istream & operator >> ( std::istream & in, Nombre & n );
 
 private:
     struct Chiffre {

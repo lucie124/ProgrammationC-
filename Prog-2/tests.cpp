@@ -46,6 +46,18 @@ TEST( TestNombre, TestOpAffectCopy )
     EXPECT_EQ( os.str(), "13579" );
 }
 
+TEST( TestNombre, TestLectureGrandNombre )
+
+{
+    std::string big{ "123456789123456789123456789123456789" };
+    std::istringstream in{ big };
+    Nombre n;
+    in >> n;
+    std::ostringstream os;
+    os << n;
+    EXPECT_EQ( os.str(), big );
+}
+
 int main( int argc, char * argv[] )
 {
     ::testing::InitGoogleTest( &argc, argv );
