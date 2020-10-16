@@ -9,22 +9,21 @@ class Nombre {
 public:
     // Constructeur par défaut
     Nombre(){
-        *premier_ = 0;
+        premier_ = new Chiffre(0);
     }
     
 
     // Constructeur par défaut
     Nombre( unsigned long n ){
-        *premier_ = Chiffre(n);
+        premier_ = new Chiffre(n);
     }
 
     // Constructeur de copie
-    Nombre(const Nombre & n){
-        premier_ = n.premier_;
-    }
+    Nombre( const Nombre & n ) : premier_{ new Chiffre( *n.premier_ )} {}
+
 
     // Destructeur
-    ~Nombre(){}
+    ~Nombre() { delete premier_; }
 
 
     // Opérateur d'affectation

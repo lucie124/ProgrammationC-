@@ -62,4 +62,7 @@ int main( int argc, char * argv[] )
 {
     ::testing::InitGoogleTest( &argc, argv );
     return RUN_ALL_TESTS();
+    // Nombre n(1);
+    // std::cin >> n;
+    // return 0;
 }

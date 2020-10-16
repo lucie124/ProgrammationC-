@@ -69,6 +69,8 @@
         "unordered_map": "cpp",
         "unordered_set": "cpp",
         "utility": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "cstdlib": "cpp",
+        "iostream": "cpp"
     }
 }

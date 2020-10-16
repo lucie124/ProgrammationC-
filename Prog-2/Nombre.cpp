@@ -29,14 +29,14 @@ std::istream & operator >> ( std::istream & in, Nombre & n )
             unsigned int d{ static_cast<unsigned int>( c - '0' )};  // d contient le chiffre entre 0 et 9 qui vient d'être lu
             Nombre::Chiffre chiffre = Nombre::Chiffre{d};
             chiffre.suivant_ = n.premier_;
-            * n.premier_ = chiffre;
-            /* Creation de nombre qui ne marche pas
-            Nombre newNb = Nombre(d);
-            newNb.premier_->suivant_ = n.premier_;
-            n.premier_ = newNb.premier_;
-            */
+            n.premier_ = new Nombre::Chiffre(chiffre);
+
+            // Nombre newNb = Nombre(d);
+            // newNb.premier_->suivant_ = n.premier_;
+            // n.premier_ = newNb.premier_;
+            
         }
-    else break;
+        else break;
     }
     return in;
 }
@@ -45,3 +45,4 @@ std::istream & operator >> ( std::istream & in, Nombre & n )
 // {
 //     return 0;
 // }
+
