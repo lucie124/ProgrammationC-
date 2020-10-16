@@ -47,7 +47,6 @@ TEST( TestNombre, TestOpAffectCopy )
 }
 
 TEST( TestNombre, TestLectureGrandNombre )
-
 {
     std::string big{ "123456789123456789123456789123456789" };
     std::istringstream in{ big };
@@ -56,6 +55,20 @@ TEST( TestNombre, TestLectureGrandNombre )
     std::ostringstream os;
     os << n;
     EXPECT_EQ( os.str(), big );
+}
+
+TEST( TestNombre, Testaddition )
+
+{
+    unsigned int add1 = 9999;
+    unsigned int add2 = 9999;
+    Nombre n{ add1 };
+    n += add2;
+    char str[10];
+    sprintf(str,"%d",add1+add2);
+    std::ostringstream os;
+    os << n;
+    EXPECT_EQ( os.str(), str );
 }
 
 int main( int argc, char * argv[] )

@@ -25,6 +25,7 @@ public:
     // Destructeur
     ~Nombre() { delete premier_; }
 
+    void pop(unsigned int d);
 
     // Opérateur d'affectation
     Nombre & operator=( const Nombre & n ){
@@ -34,6 +35,12 @@ public:
     
     friend std::ostream & operator << ( std::ostream & out, const Nombre & n );
     friend std::istream & operator >> ( std::istream & in, Nombre & n );
+
+    friend Nombre & operator +=( Nombre & n, unsigned int i);
+    friend Nombre & operator *=( Nombre & n, unsigned int i);
+
+    Nombre operator+(unsigned int i);
+    // Nombre operator*(unsigned int i);
 
 private:
     struct Chiffre {
