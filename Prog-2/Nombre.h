@@ -37,9 +37,11 @@ public:
     friend std::istream & operator >> ( std::istream & in, Nombre & n );
 
     friend Nombre & operator +=( Nombre & n, unsigned int i);
+    friend Nombre & operator +=( Nombre & n, Nombre & n2);
     friend Nombre & operator *=( Nombre & n, unsigned int i);
 
     Nombre operator+(unsigned int i);
+    Nombre operator+(Nombre & n);
     Nombre operator*(unsigned int i);
 
 private:
@@ -55,6 +57,7 @@ private:
             chiffre_ = c.chiffre_ ;
             suivant_ = c.suivant_ ? new Chiffre(*c.suivant_) : nullptr ;
         }
+        Chiffre operator+(unsigned int i);
     };
     Chiffre * premier_;
 

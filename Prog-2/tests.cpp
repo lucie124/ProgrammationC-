@@ -58,10 +58,9 @@ TEST( TestNombre, TestLectureGrandNombre )
 }
 
 TEST( TestNombre, Testaddition )
-
 {
-    unsigned int add1 = 9999;
-    unsigned int add2 = 389;
+    unsigned int add1 = 15;
+    unsigned int add2 = 16;
     Nombre n{ add1 };
     n += add2;
     char str[10];
@@ -71,26 +70,56 @@ TEST( TestNombre, Testaddition )
     EXPECT_EQ( os.str(), str );
 }
 
-// TEST( TestNombre, Testmultiplication )
+TEST( TestNombre, Testaddition2Nombre )
+{
+    unsigned int add1 = 99;
+    unsigned int add2 = 1;
+    Nombre n{ add1 };
+    Nombre n2{ add2 };
+    n += n2;
+    char str[10];
+    sprintf(str,"%d",add1+add2);
+    std::ostringstream os;
+    os << n;
+    EXPECT_EQ( os.str(), str );
+}
 
-// {
-//     unsigned int mul1 = 13;
-//     unsigned int mul2 = 24;
-//     Nombre n{ mul1 };
-//     n *= mul2;
-//     char str[10];
-//     sprintf(str,"%d",mul1*mul2);
-//     std::ostringstream os;
-//     os << n;
-//     EXPECT_EQ( os.str(), str );
-// }
+TEST( TestNombre, Testmultiplication )
+{
+    unsigned int mul1 = 434556;
+    unsigned int mul2 = 256;
+    Nombre n{ mul1 };
+    n *= mul2;
+    char str[10];
+    sprintf(str,"%d",mul1*mul2);
+    std::ostringstream os;
+    os << n;
+    EXPECT_EQ( os.str(), str );
+}
 
 
 int main( int argc, char * argv[] )
 {
     ::testing::InitGoogleTest( &argc, argv );
     return RUN_ALL_TESTS();
-    // Nombre n(1);
-    // std::cin >> n;
+            
+    // unsigned int mul1 = 54;
+    // unsigned int mul2 = 10;
+    // Nombre n{ mul1 };
+    // Nombre n2{ 0 };
+    // std::cout << n2 << std::endl;
+    // for(int k = 0; k<mul2; k++){
+    //     n2 += n;
+    //     std::cout << n2 << std::endl;
+    // }
+
+
+    // Nombre n {0};
+    // std::cout << n << std::endl;
+    // Nombre n2{ 54 };
+    // for(int i = 0 ; i < 20 ; i++){
+    //     n+=n2;
+    //     std::cout << n << std::endl;
+    // }
     // return 0;
 }

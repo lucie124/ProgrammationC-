@@ -49,6 +49,11 @@ Nombre & operator +=( Nombre & n, unsigned int i){
 }
 
 
+Nombre & operator +=( Nombre & n, Nombre & n2){
+    n = n + n2;
+    return n;
+}
+
 Nombre Nombre::operator+(unsigned int i){
     Chiffre * curr = premier_;
     unsigned int val = curr->chiffre_;
@@ -70,27 +75,83 @@ Nombre Nombre::operator+(unsigned int i){
     return * this;
 }
 
-// Nombre & operator *=( Nombre & n, unsigned int i){
-//     n = n * i;
-//     return n;
-// }
+Nombre Nombre::operator+(Nombre & n){
+    // Nombre somme{ 0 };
+    Chiffre * curr1 = premier_;
+    Chiffre * curr2 = n.premier_;
+    unsigned int val1 = curr1->chiffre_;
+    unsigned int val2 = curr2->chiffre_;
+    unsigned long sum = 0, carry = 0;
+    while (curr1->suivant_ && curr2->suivant_){
+        sum = val1 + val2 + carry;
+        curr1->chiffre_ = sum % 10;
+        curr1 = curr1->suivant_;
+        curr2 = curr2->suivant_;
+        val1 = curr1->chiffre_;
+        val2 = curr2->chiffre_;
+        carry = sum / 10;
+    };
+    sum = val1 + val2 + carry;
+    curr1->chiffre_ = sum % 10;
+    carry = sum / 10;
+
+    if (carry > 0 && curr1->suivant_){
+        curr1 = curr1->suivant_;
+        val1 = curr1->chiffre_;
+        while (curr1->suivant_){
+            sum = val1 + carry;
+            curr1->chiffre_ = sum % 10;
+            curr1 = curr1->suivant_;
+            val1 = curr1->chiffre_;
+            carry = sum / 10;
+        } 
+        sum = val1 + carry;
+        curr1->chiffre_ = sum % 10;
+        carry = sum / 10;
+    }
+
+    if (curr2->suivant_){
+        curr2 = curr2->suivant_;
+        val2 = curr2->chiffre_;
+        while (curr2->suivant_)
+        {
+            sum = val2 + carry;
+            curr1->suivant_ = new Chiffre(sum % 10);
+            curr1 = curr1->suivant_;
+            curr2 = curr2->suivant_;
+            val2 = curr2->chiffre_;
+            carry = sum / 10;
+        }
+        sum = val2 + carry;
+        curr1->suivant_ = new Chiffre(sum % 10);
+        carry = sum / 10;
+    }
+    
+    if (carry>0)
+    {
+        curr1->suivant_ = new Chiffre(carry);
+    }
+    return * this;
+}
 
 
-// Nombre Nombre::operator*(unsigned int i){
-//     Nombre mul(0);
-//     Chiffre * curr = premier_;
-//     unsigned int val;
-//     while (curr)
-//     {
-//         val = curr->chiffre_;
-//         for(int k = 0; k<i;k++){
-//             mul += val;
-//         }
-//         curr = curr->suivant_;
-//     }
-//     return mul;
-// }
+Nombre & operator *=( Nombre & n, unsigned int i){
+    n = n * i;
+    return n;
+}
 
+Nombre Nombre::operator*(unsigned int i){
+    Nombre n{0};
+    for(int k = 0; k<i; k++){
+        n = n + *this;
+    }
+    return n;
+}
+
+/*
+Pas d'idée de construire la multiplication sans l'addition de deux nombre,
+donc j'ai construit l'addition des nombre pour faire la multiplication.
+*/
 
 
 
