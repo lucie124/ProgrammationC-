@@ -44,6 +44,8 @@ public:
     Nombre operator+(Nombre & n);
     Nombre operator*(unsigned int i);
 
+    friend Nombre factorielle( unsigned int n );
+
 private:
     struct Chiffre {
         unsigned int chiffre_;     // entre 0 et 9

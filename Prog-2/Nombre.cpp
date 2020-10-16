@@ -148,10 +148,24 @@ Nombre Nombre::operator*(unsigned int i){
     return n;
 }
 
+
 /*
 Pas d'idée de construire la multiplication sans l'addition de deux nombre,
 donc j'ai construit l'addition des nombre pour faire la multiplication.
 */
+
+
+// Retourne un objet Nombre représentant la factorielle de l'argument n
+Nombre factorielle( unsigned int n ){
+    Nombre Nb{n};
+    for(int i = n-1; i > 0; i--){
+        Nb *= i;
+        // printf("running boucle %d\n", i);
+    }
+    return Nb;
+}
+
+
 
 
 

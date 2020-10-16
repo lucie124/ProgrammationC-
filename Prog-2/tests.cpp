@@ -3,6 +3,7 @@
 #include <utility>
 #include <sstream>
 
+Nombre factorielle( unsigned int n );
 
 TEST( TestNombre, TestNombreVide_Defaut )
 {
@@ -97,6 +98,12 @@ TEST( TestNombre, Testmultiplication )
     EXPECT_EQ( os.str(), str );
 }
 
+TEST( TestNombre, TestFactorielle123 )
+{
+    std::ostringstream os;
+    os << factorielle( 123 );;
+    EXPECT_EQ( os.str(), "12146304367025329675766243241881295855454217088483382315328918161829235892362167668831156960612640202170735835221294047782591091570411651472186029519906261646730733907419814952960000000000000000000000000000" );
+}
 
 int main( int argc, char * argv[] )
 {
