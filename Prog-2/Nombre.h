@@ -40,7 +40,7 @@ public:
     friend Nombre & operator *=( Nombre & n, unsigned int i);
 
     Nombre operator+(unsigned int i);
-    // Nombre operator*(unsigned int i);
+    Nombre operator*(unsigned int i);
 
 private:
     struct Chiffre {

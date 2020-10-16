@@ -61,7 +61,7 @@ TEST( TestNombre, Testaddition )
 
 {
     unsigned int add1 = 9999;
-    unsigned int add2 = 9999;
+    unsigned int add2 = 389;
     Nombre n{ add1 };
     n += add2;
     char str[10];
@@ -70,6 +70,21 @@ TEST( TestNombre, Testaddition )
     os << n;
     EXPECT_EQ( os.str(), str );
 }
+
+// TEST( TestNombre, Testmultiplication )
+
+// {
+//     unsigned int mul1 = 13;
+//     unsigned int mul2 = 24;
+//     Nombre n{ mul1 };
+//     n *= mul2;
+//     char str[10];
+//     sprintf(str,"%d",mul1*mul2);
+//     std::ostringstream os;
+//     os << n;
+//     EXPECT_EQ( os.str(), str );
+// }
+
 
 int main( int argc, char * argv[] )
 {

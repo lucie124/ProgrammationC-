@@ -44,7 +44,7 @@ std::istream & operator >> ( std::istream & in, Nombre & n )
 
 
 Nombre & operator +=( Nombre & n, unsigned int i){
-		n = n+i;
+	n = n + i;
     return n;
 }
 
@@ -53,14 +53,16 @@ Nombre Nombre::operator+(unsigned int i){
     Chiffre * curr = premier_;
     unsigned int val = curr->chiffre_;
     unsigned long sum = 0, carry = i;
-    while (carry>0 && curr){
-        sum = val+ carry;
+    while (carry>0 && curr->suivant_){
+        sum = val + carry;
         curr->chiffre_ = sum % 10;
         curr = curr->suivant_;
         val = curr->chiffre_;
         carry = sum / 10;
-    }
-
+    };
+    sum = val + carry;
+    curr->chiffre_ = sum % 10;
+    carry = sum / 10;
     if (carry>0)
     {
         curr->suivant_ = new Chiffre(carry);
@@ -68,13 +70,25 @@ Nombre Nombre::operator+(unsigned int i){
     return * this;
 }
 
-Nombre & operator *=( Nombre & n, unsigned int i){
-    return n;
-}
+// Nombre & operator *=( Nombre & n, unsigned int i){
+//     n = n * i;
+//     return n;
+// }
 
 
 // Nombre Nombre::operator*(unsigned int i){
-
+//     Nombre mul(0);
+//     Chiffre * curr = premier_;
+//     unsigned int val;
+//     while (curr)
+//     {
+//         val = curr->chiffre_;
+//         for(int k = 0; k<i;k++){
+//             mul += val;
+//         }
+//         curr = curr->suivant_;
+//     }
+//     return mul;
 // }
 
 
@@ -88,3 +102,20 @@ Nombre & operator *=( Nombre & n, unsigned int i){
             // Nombre newNb = Nombre(d);
             // newNb.premier_->suivant_ = n.premier_;
             // n.premier_ = newNb.premier_;
+
+
+    // unsigned int val1 = curr->chiffre_;
+    // unsigned long sum = 0, carry = i;
+    // sum = val1+ carry;
+    // ch->chiffre_ = sum % 10;
+    // curr = curr->suivant_;
+    // carry = sum / 10;
+    // while (carry>0 && curr->suivant_)
+    // {		
+    //     val1 = curr->chiffre_;	
+    //     sum = val1 + carry;
+    //     ch->suivant_ = new Chiffre(sum % 10);
+    //     ch = ch->suivant_;
+    //     curr = curr->suivant_;
+    //     carry = sum / 10;
+    // }  
