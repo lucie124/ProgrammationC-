@@ -10,14 +10,14 @@ TEST( TestDerivation, TestAffichageNombre )
     EXPECT_EQ( os.str(), "2" );
 }
 
-// TEST( TestDerivation, TestAffichageVariable )
-// {
-//     const Expression * e = new Variable( "x" );
-//     std::ostringstream os;
-//     os << *e;
-//     EXPECT_EQ(os.str(), "x" );
-//     delete e;
-// }
+TEST( TestDerivation, TestAffichageVariable )
+{
+    const Expression * e = new Variable( "x" );
+    std::ostringstream os;
+    os << *e;
+    EXPECT_EQ(os.str(), "x" );
+    delete e;
+}
  
 // TEST( TestDerivation, TestDerivationNombre )
 // {

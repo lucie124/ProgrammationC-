@@ -2,11 +2,11 @@
 
 // ostream & operator << (ostream & out, Expression * e )
 // {
-//     e->affiche();
+//     e->affiche(out);
 //     return out;
 // }
 
-ostream& operator<<( ostream& out, Expression & e )
+ostream& operator<<( ostream& out, Expression const & e )
 {
         e.affiche(out);
         return out;

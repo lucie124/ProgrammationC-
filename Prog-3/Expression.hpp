@@ -14,7 +14,8 @@ public:
     }
 
     // virtual Expression * derivation() = 0;
-    friend ostream& operator<<( ostream& out, Expression & e );
+    friend ostream& operator<<( ostream& out, Expression const & e );
+    // friend ostream& operator<<( ostream& out, Expression * e );
 
     virtual ostream & affiche(ostream & out) const = 0;
 };
