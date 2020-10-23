@@ -2,6 +2,10 @@
 #include <string>
 using namespace std;
 
+
+int compteur = 0;
+int compteur2 = 0;
+
 class Expression {
 
 public:
@@ -26,10 +30,13 @@ public:
     Nombre(int n){
         valeur = n;
         cout << "constructeur Nombre" << endl;
+        compteur +=1;
+        compteur2 +=1;
     }
 
     ~Nombre(){
         cout << "destructeur Nombre" << endl;
+        compteur -=1;
     }
 
     ostream & affiche(ostream & out) const {
@@ -50,10 +57,13 @@ public:
     Variable(string s){
         nom = s;
         cout << "constructeur Variable" << endl;
+        compteur +=1;
+        compteur2 +=1;
     }
 
     ~Variable(){
         cout << "destructeur Variable" << endl;
+        compteur -=1;
     }
 
     ostream & affiche(ostream & out) const{
@@ -70,4 +80,11 @@ public:
     }
 private:
     string nom;
+};
+
+
+class Operation : public Expression {
+
+
+
 };

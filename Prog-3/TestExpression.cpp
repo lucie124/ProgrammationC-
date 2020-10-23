@@ -1,7 +1,10 @@
 #include <sstream>
 #include "Expression.hpp"
 #include "gtest/gtest.h"
- 
+
+// int compteur = 0;
+// int compteur2 = 0;
+
 TEST( TestDerivation, TestAffichageNombre )
 {
     Nombre n( 2 );
@@ -48,6 +51,36 @@ TEST( TestDerivation, TestDerivationVariable )
     EXPECT_EQ( os2.str(), "0" );
     delete e;
     delete f;
+}
+
+TEST( TestDerivation, TestNombreInstance )
+{
+    compteur = 0;
+    compteur2 = 0;
+    int c = 0;
+    int c2 = 0;
+    const Expression * e = new Variable( "x" );
+    c+=1;
+    c2+=1;
+    const Expression * f = e->derive( "x" );
+    c+=1;
+    c2+=1;
+    EXPECT_EQ( compteur2, c2 );
+    EXPECT_EQ( compteur, c );
+    delete f;
+    c-=1;
+    EXPECT_EQ( compteur, c );
+ 
+    f = e->derive( "y" );
+    c+=1;
+    c2+=1;
+    EXPECT_EQ( compteur2, c2 );
+    EXPECT_EQ( compteur, c );
+    delete e;
+    c-=1;
+    delete f;
+    c-=1;
+    EXPECT_EQ( compteur, c );
 }
  
 // TEST( TestDerivation, TestAffichageAddition )
