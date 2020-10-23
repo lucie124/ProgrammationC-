@@ -13,11 +13,10 @@ public:
         cout << "destructeur Expression" << endl;
     }
 
-    // virtual Expression * derivation() = 0;
     friend ostream& operator<<( ostream& out, Expression const & e );
-    // friend ostream& operator<<( ostream& out, Expression * e );
-
     virtual ostream & affiche(ostream & out) const = 0;
+
+    virtual Expression * derive(string v) const = 0;
 };
 
 
@@ -33,8 +32,12 @@ public:
         cout << "destructeur Nombre" << endl;
     }
 
-    ostream & affiche(ostream & out) const{
+    ostream & affiche(ostream & out) const {
         return out << valeur;
+    }
+
+    Nombre * derive( string v ) const {
+        return new Nombre(0);
     }
 
 private:
@@ -43,7 +46,6 @@ private:
 };
 
 class Variable : public Expression {
-
 public:
     Variable(string s){
         nom = s;
@@ -58,7 +60,14 @@ public:
         return out << nom;
     }
 
+    Nombre * derive( string v ) const {
+        if(nom == v){
+            return new Nombre(1);
+        }
+        else{
+            return new Nombre(0);
+        }
+    }
 private:
     string nom;
-
 };

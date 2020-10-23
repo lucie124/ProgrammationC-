@@ -19,36 +19,36 @@ TEST( TestDerivation, TestAffichageVariable )
     delete e;
 }
  
-// TEST( TestDerivation, TestDerivationNombre )
-// {
-//     const Expression * e = new Nombre( -2 );
-//     const Expression * f = e->derive( "x" );
-//     ASSERT_TRUE( nullptr != f );
-//     std::ostringstream os;
-//     os << *f;
-//     EXPECT_EQ( os.str(), "0" );
-//     delete e;
-//     delete f;
-// }
+TEST( TestDerivation, TestDerivationNombre )
+{
+    const Expression * e = new Nombre( -2 );
+    const Expression * f = e->derive( "x" );
+    ASSERT_TRUE( nullptr != f );
+    std::ostringstream os;
+    os << *f;
+    EXPECT_EQ( os.str(), "0" );
+    delete e;
+    delete f;
+}
  
-// TEST( TestDerivation, TestDerivationVariable )
-// {
-//     const Expression * e = new Variable( "x" );
-//     const Expression * f = e->derive( "x" );
-//     ASSERT_TRUE( nullptr != f );
-//     std::ostringstream os1;
-//     os1 << *f;
-//     EXPECT_EQ( os1.str(), "1" );
-//     delete f;
+TEST( TestDerivation, TestDerivationVariable )
+{
+    const Expression * e = new Variable( "x" );
+    const Expression * f = e->derive( "x" );
+    ASSERT_TRUE( nullptr != f );
+    std::ostringstream os1;
+    os1 << *f;
+    EXPECT_EQ( os1.str(), "1" );
+    delete f;
  
-//     f = e->derive( "y" );
-//     ASSERT_TRUE( nullptr != f );
-//     std::ostringstream os2;
-//     os2 << *f;
-//     EXPECT_EQ( os2.str(), "0" );
-//     delete e;
-//     delete f;
-// }
+    f = e->derive( "y" );
+    ASSERT_TRUE( nullptr != f );
+    std::ostringstream os2;
+    os2 << *f;
+    EXPECT_EQ( os2.str(), "0" );
+    delete e;
+    delete f;
+}
  
 // TEST( TestDerivation, TestAffichageAddition )
 // {
