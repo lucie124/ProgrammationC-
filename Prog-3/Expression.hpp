@@ -10,11 +10,11 @@ class Expression {
 
 public:
     Expression(){
-        cout << "constructeur Expression" << endl;
+        // cout << "constructeur Expression" << endl;
     }
 
     virtual ~Expression(){
-        cout << "destructeur Expression" << endl;
+        // cout << "destructeur Expression" << endl;
     }
 
     friend ostream& operator<<( ostream& out, Expression const & e );
@@ -29,14 +29,14 @@ class Nombre : public Expression {
 public:
     Nombre(int n){
         valeur = n;
-        cout << "constructeur Nombre" << endl;
-        compteur +=1;
-        compteur2 +=1;
+        // cout << "constructeur Nombre" << endl;
+        // compteur +=1;
+        // compteur2 +=1;
     }
 
     ~Nombre(){
-        cout << "destructeur Nombre" << endl;
-        compteur -=1;
+        // cout << "destructeur Nombre" << endl;
+        // compteur -=1;
     }
 
     ostream & affiche(ostream & out) const {
@@ -56,14 +56,14 @@ class Variable : public Expression {
 public:
     Variable(string s){
         nom = s;
-        cout << "constructeur Variable" << endl;
-        compteur +=1;
-        compteur2 +=1;
+        // cout << "constructeur Variable" << endl;
+        // compteur +=1;
+        // compteur2 +=1;
     }
 
     ~Variable(){
-        cout << "destructeur Variable" << endl;
-        compteur -=1;
+        // cout << "destructeur Variable" << endl;
+        // compteur -=1;
     }
 
     ostream & affiche(ostream & out) const{
@@ -86,11 +86,11 @@ private:
 class Operation : public Expression {
 public:
     Operation(){
-        cout << "constructeur Operation" << endl;
+        // cout << "constructeur Operation" << endl;
     }
 
     virtual ~Operation(){
-        cout << "destructeur Operation" << endl;
+        // cout << "destructeur Operation" << endl;
     }
 
     // friend ostream& operator<<( ostream& out, Expression const & e );
@@ -105,11 +105,11 @@ public:
     Addition(Expression * a1, Expression * a2){
         somme[0] = a1;
         somme[1] = a2;
-        cout << "constructeur Addition" << endl;
+        // cout << "constructeur Addition" << endl;
     }
 
     ~Addition(){
-        cout << "destructeur Addition" << endl;
+        // cout << "destructeur Addition" << endl;
     }
 
     ostream & affiche(ostream & out) const{
@@ -129,15 +129,19 @@ public:
     Multiplication(Expression * a1, Expression * a2){
         produit[0] = a1;
         produit[1] = a2;
-        cout << "constructeur Multiplication" << endl;
+        // cout << "constructeur Multiplication" << endl;
     }
     
     ~Multiplication(){
-        cout << "destructeur Multiplication" << endl;
+        // cout << "destructeur Multiplication" << endl;
     }
 
     ostream & affiche(ostream & out) const{
         return out << "(" << *produit[0] << " * " << *produit[1] << ")";
+    }
+
+    Expression * derive(string v) const{
+        return new Addition(new Multiplication(produit[0]->derive(v), produit[1]), new Multiplication(produit[0], produit[1]->derive(v)));
     }
 private:
     Expression * produit[2];
