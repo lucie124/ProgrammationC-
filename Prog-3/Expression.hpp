@@ -3,8 +3,8 @@
 using namespace std;
 
 
-int compteur = 0;
-int compteur2 = 0;
+// int compteur = 0;
+// int compteur2 = 0;
 
 class Expression {
 
@@ -18,8 +18,10 @@ public:
 
     friend ostream& operator<<( ostream& out, Expression const & e );
     virtual ostream & affiche(ostream & out) const = 0;
-
     virtual Expression * derive(string v) const = 0;
+    virtual Expression * simplifie() const = 0;
+    // virtual auto getvalue() const = 0;
+
 };
 
 
@@ -30,10 +32,11 @@ public:
     ~Nombre();
     ostream & affiche(ostream & out) const;
     Nombre * derive( string v ) const;
-
+    Nombre * simplifie() const;
 private:
     int valeur;
 };
+
 
 class Variable : public Expression {
 public:
@@ -41,6 +44,7 @@ public:
     ~Variable();
     ostream & affiche(ostream & out) const;
     Nombre * derive( string v ) const;
+    Variable * simplifie() const;
 
 private:
     string nom;
@@ -63,7 +67,7 @@ public:
     ~Addition();
     ostream & affiche(ostream & out) const;
     Expression * derive(string v) const;
-
+    Expression * simplifie() const;
 private:
     Expression * somme[2];
 };
@@ -74,6 +78,7 @@ public:
     ~Multiplication();
     ostream & affiche(ostream & out) const;
     Expression * derive(string v) const;
+    Expression * simplifie() const;
 
 private:
     Expression * produit[2];

@@ -129,11 +129,35 @@ TEST( TestDerivation, TestDerivationMultiplication )
     delete f;
 }
 
+// TEST( TestDerivation, TestSimplification )
+// {
+//     // This test expects (f * g)' = f' * g + f * g'
+//     const Expression * e = new Addition(
+//                          new Nombre( 4 ),
+//                          new Multiplication( new Nombre( 2 ), new Variable( 3 ))
+//                      );
+//     // const Expression * f = e->derive( "x" );
+//     // ASSERT_TRUE( nullptr != f );
+//     std::ostringstream os;
+//     os << *e;
+//     EXPECT_EQ( os.str(), "((1 * (y * z)) + (x * ((0 * z) + (y * 0))))" );
+//     delete e;
+//     delete f;
+// }
 
 
 int main( int argc, char * argv[] )
 {
-    ::testing::InitGoogleTest( &argc, argv );
-    return RUN_ALL_TESTS();
+    // ::testing::InitGoogleTest( &argc, argv );
+    // return RUN_ALL_TESTS();
+
+    const Expression * e = new Addition(
+                         new Addition(new Nombre( 4 ), new Nombre( 3 )),
+                         new Multiplication( new Nombre( 2 ), new Nombre( 3 ))
+                     );
+    cout << *e << endl;
+    e->simplifie();
+    cout << *e << endl;
+    return 0;
 
 }
