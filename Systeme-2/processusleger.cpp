@@ -84,16 +84,30 @@ public:
  
     void put( int message ) {
         // TODO : ajouter les mecanismes de synchronisation
+        unique_lock< mutex > lock( mutex_ );
+        // while( nb_messages_ == box_size_) {
+        //     box_not_full_.wait( lock );
+        // }
+        while (box_[put_index_] != -1){
+            box_not_full_.wait( lock );
+        }
         box_[ put_index_ ] = message;
         put_index_ = ( put_index_ + 1 ) % box_size_;
+        // ++nb_messages_;
+        box_not_empty_.notify_one();
     }
  
     int get() {
         // TODO : ajouter les mecanismes de synchronisation
+        unique_lock< mutex > lock( mutex_ );
+        while( box_[get_index_]==-1){
+            box_not_empty_.wait( lock );
+        }
         int message = box_[get_index_];
         // Pour détecter les erreurs
         box_[get_index_] = -1;
         get_index_ = ( get_index_ + 1 ) % box_size_;
+        box_not_full_.notify_one();
         return message;
     }
 private:
@@ -192,7 +206,7 @@ public:
 
             //print message
             if (message < 0){
-                cout << "Consumer - extract error" << endl;
+                cout << "Consumer extract error" << endl;
             }
             else{
                 cout << "Consumer receive : " << message << endl;
