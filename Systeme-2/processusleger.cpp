@@ -5,6 +5,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
+#include <unistd.h> 
 using namespace std;
 
 
@@ -173,11 +174,13 @@ public:
             Random random(50);
             using milliseconds = std::chrono::duration< int, std::milli >;
             std::this_thread::sleep_for( milliseconds( random() ));
+            // sleep(2);
 
             //put message
             int message = rand();
             box_.put(message);
-            cout << "Producer send : " << message << endl;
+            printf("Producer %d send : %d\n", name_, message);
+            // cout << "Producer " << name_ << " send : " << message << endl;
         }
     }
 };
@@ -200,16 +203,19 @@ public:
             Random random(50);
             using milliseconds = std::chrono::duration< int, std::milli >;
             std::this_thread::sleep_for( milliseconds( random() ));
+            // sleep(2);
 
             //get message
             int message = box_.get();
 
             //print message
             if (message < 0){
-                cout << "Consumer extract error" << endl;
+                printf("Consumer %d extract error\n", name_);
+                // cout << "Consumer " << name_ << " extract error" << endl;
             }
             else{
-                cout << "Consumer receive : " << message << endl;
+                printf("Consumer %d receive : %d\n", name_, message);
+                // cout << "Consumer " << name_ << " receive : " << message << endl;
             }
         }
     }
@@ -220,29 +226,63 @@ public:
 
 
 
+/*
+ * Test avec 1 producteur et 1 consommateur
+ */
+// int main() {
+//     const unsigned box_size = 2;
+//     const unsigned nb_messages = 20;
+ 
+//     Random random( 50 );
+//     MessageBox box( box_size );
+//     Producer producer( 1, box, random, nb_messages );
+//     Consumer consumer( 1, box, random, nb_messages );
+ 
+//     std::cout << "start" << std::endl;
+ 
+//     std::thread producer_thread( producer );
+//     std::thread consumer_thread( consumer );
+//     producer_thread.join();
+//     consumer_thread.join();
+ 
+//     std::cout << "finish" << std::endl;
+ 
+//     return 0;
+// }
+
 
 
 
 /*
- * Test avec 1 producteur et 1 consommateur
+
+ * Test avec plusieurs producteurs et consommateurs
+
  */
+
 int main() {
     const unsigned box_size = 2;
-    const unsigned nb_messages = 20;
- 
+    const unsigned nb_messages = 10;
+    const unsigned nb_producers = 4;
+    const unsigned nb_consumers = 2;
+    static_assert( nb_producers * nb_messages % nb_consumers == 0, "incorrect values" );
     Random random( 50 );
     MessageBox box( box_size );
-    Producer producer( 1, box, random, nb_messages );
-    Consumer consumer( 1, box, random, nb_messages );
- 
+
     std::cout << "start" << std::endl;
- 
-    std::thread producer_thread( producer );
-    std::thread consumer_thread( consumer );
-    producer_thread.join();
-    consumer_thread.join();
+
+    std::vector< std::thread > group;
+    for( unsigned i = 0; i < nb_producers; ++i ) {
+        group.push_back( std::thread( Producer( i + 1, box, random, nb_messages )));
+    }
+    unsigned nb = nb_producers * nb_messages / nb_consumers;
+    for( unsigned i = 0; i < nb_consumers; ++i ) {
+        group.push_back( std::thread( Consumer( i + 1, box, random, nb )));
+    }
+
+    for( auto & th : group ) {
+        th.join();
+    }
  
     std::cout << "finish" << std::endl;
- 
     return 0;
 }
