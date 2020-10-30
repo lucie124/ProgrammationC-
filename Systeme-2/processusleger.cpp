@@ -1,10 +1,13 @@
+// #include "class.h"
 #include <iostream>
 #include <sstream>
 #include <random>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
- 
+using namespace std;
+
+
 /*
  * Générateur de nombres aléatoires
  * Il n'est pas nécessaire de comprendre son fonctionnement
@@ -99,8 +102,12 @@ private:
     std::vector< int > box_;
     unsigned put_index_;
     unsigned get_index_;
- 
+
     // TODO : ajouter les objets de synchronisation
+    // unsigned int nb_messages_;
+    condition_variable box_not_empty_;
+    condition_variable box_not_full_;
+    std::mutex mutex_;
 };
  
 
@@ -147,7 +154,17 @@ public:
     void operator()() override {
         // TODO : déposer dans box nb_messages nombres entiers positifs avec attente
         // aléatoire entre chaque. Afficher des messages pour suivre l'avancement.
-        
+        for (int i = 0; i < nb_messages_; i++){
+            //attente aléatoire
+            Random random(50);
+            using milliseconds = std::chrono::duration< int, std::milli >;
+            std::this_thread::sleep_for( milliseconds( random() ));
+
+            //put message
+            int message = rand();
+            box_.put(message);
+            cout << "Producer send : " << message << endl;
+        }
     }
 };
  
@@ -164,7 +181,54 @@ public:
         // TODO : extraire de box nb_messages avec attente aléatoire entre chaque.
         // Afficher des messages pour suivre l'avancement.
         // Signaler comme erreur l'extraction d'un nombre négatif.
+        for (int i = 0; i < nb_messages_; i++){
+            //attente aléatoire
+            Random random(50);
+            using milliseconds = std::chrono::duration< int, std::milli >;
+            std::this_thread::sleep_for( milliseconds( random() ));
+
+            //get message
+            int message = box_.get();
+
+            //print message
+            if (message < 0){
+                cout << "Consumer - extract error" << endl;
+            }
+            else{
+                cout << "Consumer receive : " << message << endl;
+            }
+        }
     }
 };
  
  
+
+
+
+
+
+
+
+/*
+ * Test avec 1 producteur et 1 consommateur
+ */
+int main() {
+    const unsigned box_size = 2;
+    const unsigned nb_messages = 20;
+ 
+    Random random( 50 );
+    MessageBox box( box_size );
+    Producer producer( 1, box, random, nb_messages );
+    Consumer consumer( 1, box, random, nb_messages );
+ 
+    std::cout << "start" << std::endl;
+ 
+    std::thread producer_thread( producer );
+    std::thread consumer_thread( consumer );
+    producer_thread.join();
+    consumer_thread.join();
+ 
+    std::cout << "finish" << std::endl;
+ 
+    return 0;
+}
