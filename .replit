@@ -1,0 +1,2 @@
+language = "cpp"
+run = "c++ -std=c++11 -I boost-interprocess Systeme-2/programme.cpp -o main -lpthread -lrt; ./main "
